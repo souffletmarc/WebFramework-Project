@@ -1,4 +1,8 @@
 MyMoodle::Application.routes.draw do
+  resources :grades
+
+  resources :courses
+
   get "session/new"
   resources :users
 
