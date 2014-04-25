@@ -7,7 +7,7 @@ MyMoodle::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root :to=>'session#new'
+  root :to=>'sessions#new'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
