@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+    belongs_to :role
+    has_many :course
     before_save :encrypt_password
     email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :firstname,  :presence => true,
