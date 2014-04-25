@@ -5,12 +5,6 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-    if !@users.where(email: 'admin@gcd.ie').take
-      Role.create(:name => "Admin")
-      Role.create(:name => "Lecturer")
-      Role.create(:name => "Student")
-      User.create(:firstname => "Admin", :lastname => "GCD", :email => "admin@gcd.ie", :password => "admin", :role => Role.where(name: 'Admin').take)
-    end
   end
 
   # GET /users/1
