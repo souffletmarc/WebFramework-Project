@@ -14,6 +14,9 @@ MyMoodle::Application.routes.draw do
   match 'signin',  :to => 'sessions#new', :via => [:get]
   match 'signout', :to => 'sessions#destroy', :via => [:get] 
   match 'sessions', :to => 'sessions#create', :via => [:post]   
+
+  match 'signup', :to => 'users#new', :via => [:get] 
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
