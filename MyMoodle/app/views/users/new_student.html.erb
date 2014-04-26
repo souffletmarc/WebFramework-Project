@@ -32,4 +32,4 @@
   </div>
   <%= f.hidden_field :role_id, :value => Role.where(name: 'Student').take.id %>
   <% end %>
-<%= link_to 'Back', students_index_path %>
+<%= link_to 'Back', students_path %>
