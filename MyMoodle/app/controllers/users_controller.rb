@@ -5,14 +5,7 @@ class UsersController < ApplicationController
   end
   
   # GET /users
-  def liststudent
-    @users = User.where(:role => Role.where(name: 'Student').take)
-  end
-
-  def listlecturer
-    @users = User.where(:role => Role.where(name: 'Lecturer').take)
-  end
-
+ 
   def lecturers_index
     @users = User.where(role: Role.where(name: 'Lecturer').take)
   end
@@ -56,6 +49,7 @@ class UsersController < ApplicationController
       else
        render action: 'newlecturer' 
       end
+  end
 
   # PATCH/PUT /users/1
   def update

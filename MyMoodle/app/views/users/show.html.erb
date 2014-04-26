@@ -19,16 +19,9 @@
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
-
 <p>
-  <strong>Password:</strong>
-  <%= @user.password %>
+  <strong>Role:</strong>
+  <%= Role.find(@user.role_id).name  %>
 </p>
-
-<p>
-  <strong>Salt:</strong>
-  <%= @user.salt %>
-</p>
-
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
