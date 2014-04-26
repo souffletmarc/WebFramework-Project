@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    if params[:role] =  Role.where(name: 'Student').take)
+    if params[:role] ==  Role.where(name: 'Student').take.id
       create_student
     else
       create_lecturer
@@ -86,6 +86,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:id, :firstname, :lastname, :email, :password, :salt, :role)
+      params.require(:user).permit(:id, :firstname, :lastname, :email, :password, :salt, :role_id)
     end
 end
