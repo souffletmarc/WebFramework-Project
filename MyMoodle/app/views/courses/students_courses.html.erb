@@ -13,7 +13,7 @@
     <% current_user.courses.each do |course| %>
       <tr>
         <td><%= course.name %></td>
-        <td><%= link_to 'Check-out', delusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Unenroll', delusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,16 +26,24 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
+      <% if !(current_user.courses.count == 5) %>
+        <th></th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.name %></td>
-        <td><%= link_to 'Subscribe', addusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% if !current_user.courses.include?(course) %>
+        <tr>
+          <td><%= course.name %></td>
+          <% if !(current_user.courses.count == 5) %>
+            <td>
+                <%= link_to 'Enroll', addusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
