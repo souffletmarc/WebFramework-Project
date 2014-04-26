@@ -32,16 +32,16 @@ MyMoodle::Application.routes.draw do
   match 'admins_modules',  :to => 'courses#admins_courses', :via => [:get]
   match 'lecturers', :to => 'users#lecturers_index', :via => [:get]
   match 'students',  :to => 'users#students_index', :via => [:get]
-<<<<<<< HEAD
+
   match 'search',  :to => 'users#search', :via => [:get]
-=======
+
 
   match 'course_adduser',  :to => 'courses#add_user', :via => [:get]
   match 'new_lecturer',  :to => 'users#new_lecturer', :via => [:get]
   match 'new_student',  :to => 'users#new_student', :via => [:get]
 
 
->>>>>>> bbdffa8dbf1a23c432b402db1a3aa9b8b8f05acc
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

@@ -30,15 +30,13 @@ class UsersController < ApplicationController
   def edit
   end
 
-<<<<<<< HEAD
   # GET /search
   def search
-    if User.where("role_id = ? AND (firstname = ? OR lastname = ?)", Role.where(name: params[:search_who]).take, params[:search_entry], params[:search_entry]).any?
-      @users = User.where("role_id = ? AND (firstname = ? OR lastname = ?)", Role.where(name: params[:search_who]).take, params[:search_entry], params[:search_entry])
+    if User.where("role_id = ? AND (id = ? OR firstname = ? OR lastname = ?)", Role.where(name: params[:search_who]).take, params[:search_entry], params[:search_entry], params[:search_entry]).any?
+      @users = User.where("role_id = ? AND (id = ? OR firstname = ? OR lastname = ?)", Role.where(name: params[:search_who]).take, params[:search_entry], params[:search_entry], params[:search_entry])
     else
       @users = User.where(role: Role.where(name: params[:search_who]).take)
     end
-    
     if params[:search_who] == "Lecturer"
       render action: 'lecturers_index'
     else
@@ -46,7 +44,6 @@ class UsersController < ApplicationController
     end
   end
   
-=======
   def create
     if params[:role] ==  Role.where(name: 'Student').take.id
       create_student
@@ -55,7 +52,6 @@ class UsersController < ApplicationController
     end
   end
 
->>>>>>> bbdffa8dbf1a23c432b402db1a3aa9b8b8f05acc
   # POST /users
   def create_student
     @user = User.new(user_params)
