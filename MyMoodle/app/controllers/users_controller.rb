@@ -56,6 +56,7 @@ class UsersController < ApplicationController
       else
        render action: 'newlecturer' 
       end
+  end
 
   # PATCH/PUT /users/1
   def update
