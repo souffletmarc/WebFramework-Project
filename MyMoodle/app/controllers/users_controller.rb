@@ -66,14 +66,18 @@ class UsersController < ApplicationController
         head :no_content 
       else
         render action: 'edit'
-        ender json: @user.errors, status: :unprocessable_entity
+        render json: @user.errors, status: :unprocessable_entity
       end
   end
 
   # DELETE /users/1
   def destroy
     @user.destroy
-    redirect_to users_url
+    if params[:role] ==  Role.where(name: 'Student').take.id
+    redirect_to students_url
+    else
+    redirect_to lecturers_url
+    end
     head :no_content
     
   end
