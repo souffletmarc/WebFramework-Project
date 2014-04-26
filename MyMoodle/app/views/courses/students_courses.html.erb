@@ -5,7 +5,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
+      <th>Unenroll</th>
     </tr>
   </thead>
 
@@ -13,8 +13,8 @@
     <% current_user.courses.each do |course| %>
       <tr>
         <td><%= course.name %></td>
-        <td><%= link_to 'Unenroll', delusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <td><center><%= link_to image_tag("del.png"), delusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
+      </center></tr>
     <% end %>
   </tbody>
 </table>
@@ -27,7 +27,7 @@
     <tr>
       <th>Name</th>
       <% if !(current_user.courses.count == 5) %>
-        <th></th>
+        <th>Enroll</th>
       <% end %>
     </tr>
   </thead>
@@ -38,9 +38,9 @@
         <tr>
           <td><%= course.name %></td>
           <% if !(current_user.courses.count == 5) %>
-            <td>
-                <%= link_to 'Enroll', addusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %>
-            </td>
+            <td><center>
+                <%= link_to image_tag("add.png"), addusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %>
+            </center</td>
           <% end %>
         </tr>
       <% end %>
