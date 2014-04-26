@@ -66,10 +66,9 @@ class CoursesController < ApplicationController
 
   def add_user
    @course = Course.find(params[:id])
-   current_user.courses << @course
    @course.users << current_user
     respond_to do |format|
-      format.html { redirect_to @course }
+      format.html { redirect_to students_modules_path }
       format.json { head :no_content }
     end
   end

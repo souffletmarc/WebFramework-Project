@@ -21,7 +21,11 @@ class SessionsController < ApplicationController
         User.create(:firstname => "Tony", :lastname => "Mullins", :email => "tony@mymoodle.ie", :password => "tony", :role => Role.where(name: 'Lecturer').take)
         User.create(:firstname => "Denis", :lastname => "Lupiana", :email => "denis@mymoodle.ie", :password => "denis", :role => Role.where(name: 'Lecturer').take)
 
-        
+        Course.create(:name => "PPD")
+        Course.create(:name => "ET")
+        Course.create(:name => "Management")
+        Course.create(:name => "Maths")
+        Course.create(:name => "English")
 
       end
     end

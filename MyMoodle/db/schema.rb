@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 20140425180724) do
 
   add_index "courses", ["user_id"], name: "index_courses_on_user_id"
 
+  create_table "courses_users", id: false, force: true do |t|
+    t.integer "course_id"
+    t.integer "user_id"
+  end
+
   create_table "grades", force: true do |t|
     t.string   "grade"
     t.integer  "user_id"
