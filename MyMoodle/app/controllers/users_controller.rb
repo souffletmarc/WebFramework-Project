@@ -7,6 +7,13 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def lecturers_index
+    @users = User.where(role: Role.where(name: 'Lecturer').take)
+  end
+
+  def students_index
+    @users = User.where(role: Role.where(name: 'Student').take)
+  end
   # GET /users/1
   # GET /users/1.json
   def show

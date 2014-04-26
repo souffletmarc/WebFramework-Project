@@ -29,12 +29,32 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Link</a></li>
+        <% if signed_in? %>
+            <li id="home_link"><%= link_to "Profil", profil_path(current_user.id) %></li>
+            <% if current_user.role == Role.where(name: 'Student').take %>
+              <li id="students_modules_link">
+                <%= link_to "Modules", students_modules_path %>
+              </li>
+            <% elsif current_user.role == Role.where(name: 'Lecturer').take %>
+              <li id="lecturers_modules_link">
+                <%= link_to "Modules", lecturers_modules_path %>
+              </li>
+            <% else %>
+              <li id="admins_modules_link">
+                <%= link_to "Modules", admins_modules_path %>
+              </li>
+              <li id="lecturers_link"><%= link_to "Lecturers", lecturers_path %></li>
+              <li id="students_link"><%= link_to "Students", students_path %></li>
+            <% end %>
+        <% else %>
+          <li id="about"><%= link_to "Sign In", signin_path %></li>
+        <% end %>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Logout</a></li>
-      </ul>
+      <% if signed_in? %>
+         <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Logout", signout_path %></li>
+         </ul>
+      <% end %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
