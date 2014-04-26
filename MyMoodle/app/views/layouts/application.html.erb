@@ -62,6 +62,7 @@
 <center>
 <div id='page-content'>
 	<%= yield %>
+	<%= debug(params) if Rails.env.development? %>
 </div>
 </center>
 </body>
