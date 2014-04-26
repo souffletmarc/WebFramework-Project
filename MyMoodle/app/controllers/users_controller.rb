@@ -18,11 +18,11 @@ class UsersController < ApplicationController
   end
 
   # GET /users/new
-  def newlecturer
+  def new_lecturer
     @user = User.new
   end
 
-  def newstudent
+  def new_student
     @user = User.new
   end
 
@@ -30,24 +30,32 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def create
+    if params[:role] =  Role.where(name: 'Student').take)
+      create_student
+    else
+      create_lecturer
+    end
+  end
+
   # POST /users
-  def createstudent
+  def create_student
     @user = User.new(user_params)
       if @user.save
         redirect_to @user, notice: 'Student was successfully created.'
         render action: 'show', status: :created, location: @user 
       else
-       render action: 'newstudent' 
+       render action: 'new_student' 
       end
   end
 
-  def createlecturer
+  def create_lecturer
      @user = User.new(user_params)
       if @user.save
         redirect_to @user, notice: 'Lecturer was successfully created.'
         render action: 'show', status: :created, location: @user 
       else
-       render action: 'newlecturer' 
+       render action: 'new_lecturer' 
       end
   end
 
@@ -78,6 +86,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:id, :firstname, :lastname, :email, :password, :salt)
+      params.require(:user).permit(:id, :firstname, :lastname, :email, :password, :salt, :role)
     end
 end

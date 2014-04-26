@@ -32,6 +32,9 @@ MyMoodle::Application.routes.draw do
   match 'lecturers', :to => 'users#lecturers_index', :via => [:get]
   match 'students',  :to => 'users#students_index', :via => [:get]
   match 'course_adduser',  :to => 'courses#add_user', :via => [:get]
+  match 'new_lecturer',  :to => 'users#new_lecturer', :via => [:get]
+  match 'new_create_student',  :to => 'users#new_student', :via => [:get]
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
