@@ -1,19 +1,28 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  # GET /users
-  # GET /users.json
   def index
-    @users = User.all
+  end
+  
+  # GET /users
+  def liststudent
+    @users = User.where(:role => Role.where(name: 'Student').take)
+  end
+
+  def listlecturer
+    @users = User.where(:role => Role.where(name: 'Lecturer').take)
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
   end
 
   # GET /users/new
-  def new
+  def newlecturer
+    @user = User.new
+  end
+
+  def newstudent
     @user = User.new
   end
 
@@ -22,43 +31,42 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.json
-  def create
+  def createstudent
     @user = User.new(user_params)
-
-    respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @user }
+        redirect_to @user, notice: 'Student was successfully created.'
+        render action: 'show', status: :created, location: @user 
       else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+       render action: 'newstudent' 
       end
-    end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
-  def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
+  def createlecturer
+     @user = User.new(user_params)
+      if @user.save
+        redirect_to @user, notice: 'Lecturer was successfully created.'
+        render action: 'show', status: :created, location: @user 
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+       render action: 'newlecturer' 
       end
-    end
+
+  # PATCH/PUT /users/1
+  def update
+      if @user.update(user_params)
+        redirect_to @user, notice: 'User was successfully updated.'
+        head :no_content 
+      else
+        render action: 'edit'
+        ender json: @user.errors, status: :unprocessable_entity
+      end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
+    redirect_to users_url
+    head :no_content
+    
   end
 
   private
