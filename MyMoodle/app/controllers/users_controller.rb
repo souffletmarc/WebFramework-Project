@@ -32,8 +32,8 @@ class UsersController < ApplicationController
 
   # GET /search
   def search
-    if User.where("role_id = ? AND (id = ? OR firstname = ? OR lastname = ?)", Role.where(name: params[:search_who]).take, params[:search_entry], params[:search_entry], params[:search_entry]).any?
-      @users = User.where("role_id = ? AND (id = ? OR firstname = ? OR lastname = ?)", Role.where(name: params[:search_who]).take, params[:search_entry], params[:search_entry], params[:search_entry])
+    if User.where("role_id = ? AND (id = ? OR lower(firstname) = ? OR lower(lastname) = ?)", Role.where(name: params[:search_who]).take, params[:search_entry].downcase, params[:search_entry].downcase, params[:search_entry].downcase).any?
+      @users = User.where("role_id = ? AND (id = ? OR lower(firstname) = ? OR lower(lastname) = ?)", Role.where(name: params[:search_who]).take, params[:search_entry].downcase, params[:search_entry].downcase, params[:search_entry].downcase)
     else
       @users = User.where(role: Role.where(name: params[:search_who]).take)
     end
