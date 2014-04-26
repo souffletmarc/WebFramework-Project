@@ -17,6 +17,7 @@ MyMoodle::Application.routes.draw do
   # Example of regular route:
   get '/profil/:id', to: 'users#show', as: 'profil'
   get '/addcourse/:id', to: 'courses#add_user', as: 'addusertocourse'
+  get '/delcourse/:id', to: 'courses#del_user', as: 'delusertocourse'
 
 
   match 'signin',  :to => 'sessions#new', :via => [:get]
@@ -31,10 +32,13 @@ MyMoodle::Application.routes.draw do
   match 'admins_modules',  :to => 'courses#admins_courses', :via => [:get]
   match 'lecturers', :to => 'users#lecturers_index', :via => [:get]
   match 'students',  :to => 'users#students_index', :via => [:get]
+<<<<<<< HEAD
   match 'course_adduser',  :to => 'courses#add_user', :via => [:get]
   match 'new_lecturer',  :to => 'users#new_lecturer', :via => [:get]
   match 'new_create_student',  :to => 'users#new_student', :via => [:get]
 
+=======
+>>>>>>> 7a68311845037d76e5f13feabb8f48958d54fa4c
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

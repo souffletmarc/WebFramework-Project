@@ -26,7 +26,8 @@ class SessionsController < ApplicationController
         Course.create(:name => "Management")
         Course.create(:name => "Maths")
         Course.create(:name => "English")
-
+        Course.create(:name => "IT")
+        Course.create(:name => "WF")
       end
     end
   

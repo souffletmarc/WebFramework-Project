@@ -1,12 +1,10 @@
 
-<h1>My courses</h1>
+<h1>My courses (<%= current_user.courses.size %>/5)</h1>
 
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -15,8 +13,7 @@
     <% current_user.courses.each do |course| %>
       <tr>
         <td><%= course.name %></td>
-        <td><%= link_to 'Show', course %></td>
-        <td><%= link_to 'Subscribe', addusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Check-out', delusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,8 +27,6 @@
     <tr>
       <th>Name</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -39,7 +34,6 @@
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.name %></td>
-        <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Subscribe', addusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

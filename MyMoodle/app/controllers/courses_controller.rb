@@ -66,9 +66,22 @@ class CoursesController < ApplicationController
 
   def add_user
    @course = Course.find(params[:id])
-   @course.users << current_user
+    if !current_user.courses.include?(@course) && current_user.courses.size <= 5
+      @course.users << current_user
+    end
     respond_to do |format|
-      format.html { redirect_to students_modules_path }
+      format.html { redirect_to students_modules_path, notice: 'Course added.'}
+      format.json { head :no_content }
+    end
+  end
+
+  def del_user
+   @course = Course.find(params[:id])
+    if current_user.courses.include?(@course)
+       @course.users.destroy(current_user)
+    end
+    respond_to do |format|
+      format.html { redirect_to students_modules_path, notice: 'Course was successfully remove from your selection.'}
       format.json { head :no_content }
     end
   end
