@@ -66,11 +66,11 @@ class CoursesController < ApplicationController
 
   def add_user
    @course = Course.find(params[:id])
-    if !current_user.courses.include?(@course) && current_user.courses.size <= 5
+    if !current_user.courses.include?(@course) && current_user.courses.size < 5
       @course.users << current_user
     end
     respond_to do |format|
-      format.html { redirect_to students_modules_path, notice: 'Course added.'}
+      format.html { redirect_to students_modules_path }
       format.json { head :no_content }
     end
   end
@@ -81,7 +81,7 @@ class CoursesController < ApplicationController
        @course.users.destroy(current_user)
     end
     respond_to do |format|
-      format.html { redirect_to students_modules_path, notice: 'Course was successfully remove from your selection.'}
+      format.html { redirect_to students_modules_path }
       format.json { head :no_content }
     end
   end

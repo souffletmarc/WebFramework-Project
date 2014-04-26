@@ -18,11 +18,11 @@ class UsersController < ApplicationController
   end
 
   # GET /users/new
-  def newlecturer
+  def new_lecturer
     @user = User.new
   end
 
-  def newstudent
+  def new_student
     @user = User.new
   end
 
@@ -30,6 +30,7 @@ class UsersController < ApplicationController
   def edit
   end
 
+<<<<<<< HEAD
   # GET /search
   def search
     if User.where("role_id = ? AND (firstname = ? OR lastname = ?)", Role.where(name: params[:search_who]).take, params[:search_entry], params[:search_entry]).any?
@@ -45,24 +46,34 @@ class UsersController < ApplicationController
     end
   end
   
+=======
+  def create
+    if params[:role] ==  Role.where(name: 'Student').take.id
+      create_student
+    else
+      create_lecturer
+    end
+  end
+
+>>>>>>> bbdffa8dbf1a23c432b402db1a3aa9b8b8f05acc
   # POST /users
-  def createstudent
+  def create_student
     @user = User.new(user_params)
       if @user.save
         redirect_to @user, notice: 'Student was successfully created.'
         render action: 'show', status: :created, location: @user 
       else
-       render action: 'newstudent' 
+       render action: 'new_student' 
       end
   end
 
-  def createlecturer
+  def create_lecturer
      @user = User.new(user_params)
       if @user.save
         redirect_to @user, notice: 'Lecturer was successfully created.'
         render action: 'show', status: :created, location: @user 
       else
-       render action: 'newlecturer' 
+       render action: 'new_lecturer' 
       end
   end
 
@@ -73,14 +84,18 @@ class UsersController < ApplicationController
         head :no_content 
       else
         render action: 'edit'
-        ender json: @user.errors, status: :unprocessable_entity
+        render json: @user.errors, status: :unprocessable_entity
       end
   end
 
   # DELETE /users/1
   def destroy
     @user.destroy
-    redirect_to users_url
+    if params[:role] ==  Role.where(name: 'Student').take.id
+    redirect_to students_url
+    else
+    redirect_to lecturers_url
+    end
     head :no_content
     
   end
@@ -93,6 +108,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:id, :firstname, :lastname, :email, :password, :salt)
+      params.require(:user).permit(:id, :firstname, :lastname, :email, :password, :salt, :role_id)
     end
 end
