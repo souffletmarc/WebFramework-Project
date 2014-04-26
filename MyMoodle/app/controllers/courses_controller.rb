@@ -64,6 +64,16 @@ class CoursesController < ApplicationController
     
   end
 
+  def add_user
+   @course = Course.find(params[:id])
+   current_user.courses << @course
+   @course.users << current_user
+    respond_to do |format|
+      format.html { redirect_to @course }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
