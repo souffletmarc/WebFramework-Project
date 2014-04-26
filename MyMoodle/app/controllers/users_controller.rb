@@ -57,7 +57,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
       if @user.save
         redirect_to @user, notice: 'Student was successfully created.'
-        render action: 'show', status: :created, location: @user 
       else
        render action: 'new_student' 
       end
@@ -67,7 +66,6 @@ class UsersController < ApplicationController
      @user = User.new(user_params)
       if @user.save
         redirect_to @user, notice: 'Lecturer was successfully created.'
-        render action: 'show', status: :created, location: @user 
       else
        render action: 'new_lecturer' 
       end
@@ -77,7 +75,6 @@ class UsersController < ApplicationController
   def update
       if @user.update(user_params)
         redirect_to @user, notice: 'User was successfully updated.'
-        head :no_content 
       else
         render action: 'edit'
         render json: @user.errors, status: :unprocessable_entity
