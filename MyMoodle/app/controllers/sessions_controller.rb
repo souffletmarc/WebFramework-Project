@@ -2,6 +2,9 @@ class SessionsController < ApplicationController
     def new
       @title = "SignIn"
       @users = User.all
+      if (signed_in?)
+        redirect_to current_user
+      end
       if !@users.where(email: 'admin@mymoodle.ie').take
         Role.create(:name => "Admin")
         Role.create(:name => "Lecturer")
