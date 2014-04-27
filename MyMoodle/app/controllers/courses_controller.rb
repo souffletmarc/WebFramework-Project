@@ -40,7 +40,6 @@ class CoursesController < ApplicationController
         redirect_to @course, notice: 'Course was successfully created.'
       else
         render action: 'new'
-        render json: @course.errors, status: :unprocessable_entity
       end
    
   end
@@ -51,16 +50,13 @@ class CoursesController < ApplicationController
         redirect_to @course, notice: 'Course was successfully updated.'
       else
         render action: 'edit'
-        render json: @course.errors, status: :unprocessable_entity
       end
   end
 
   # DELETE /courses/1
   def destroy
     @course.destroy
-    redirect_to courses_url
-    head :no_content
-    
+    redirect_to admins_modules_path
   end
 
   def add_user
@@ -85,7 +81,6 @@ class CoursesController < ApplicationController
     if user_student != nil && !(user_student.grades.where(course_id: params[:course_id]).any?)
       user_student.grades << Grade.create(grade: params[:mark], user_id: user_student.id, course_id: params[:course_id])
     end
-
     redirect_to course_path(params[:course_id])
   end
   
@@ -101,10 +96,7 @@ class CoursesController < ApplicationController
     if current_user.courses.include?(@course)
        @course.users.destroy(current_user)
     end
-    respond_to do |format|
-      format.html { redirect_to students_modules_path }
-      format.json { head :no_content }
-    end
+    redirect_to students_modules_path
   end
 
   private
