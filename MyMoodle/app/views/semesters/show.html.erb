@@ -9,6 +9,6 @@
   <strong>Semester end:</strong>
   <%= @semester.end %>
 </p>
+<%= link_to image_tag("edit.png"), edit_semester_path(@semester)  %>
+<%= link_to image_tag("back.png"), semesters_path %>
 
-<%= link_to 'Edit', edit_semester_path(@semester) %> |
-<%= link_to 'Back', semesters_path %>
