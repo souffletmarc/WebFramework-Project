@@ -1,12 +1,12 @@
 <h1>Listing Student</h1>
-
+<br>
 <%= form_tag("/search", method: "get") do %>
 	<%= hidden_field_tag(:search_who, "Student") %>
   	<%= label_tag(:search_entry, "Search a student:") %>
   	<%= text_field_tag(:search_entry) %>
   	<%= submit_tag("Search") %>
 <% end %>
-
+<br>
 <table class="table table-bordered">
   <thead>
     <tr>
