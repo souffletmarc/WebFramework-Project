@@ -83,10 +83,12 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
-    if params[:role_id] ==  Role.where(name: 'Student').take.id
+   
+    if @user.role_id ==  Role.where(name: 'Student').take.id
+     @user.destroy
     redirect_to students_url
     else
+    @user.destroy
     redirect_to lecturers_url
     end
   end
@@ -101,7 +103,7 @@ class UsersController < ApplicationController
     end
     return tab
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

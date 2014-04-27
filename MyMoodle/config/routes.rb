@@ -1,4 +1,6 @@
 MyMoodle::Application.routes.draw do
+  resources :semesters
+
   resources :roles
 
   resources :grades
