@@ -31,7 +31,7 @@
        
          <% if !(user.courses.count == 3) %>
             <!--IF pour checker si le cours n'a pas de prof-->
-            <td> <%= form_tag( addusertocourse_path, method: "post") do %> 
+            <td> <%= form_tag( addusertocoursepost_path, method: "post") do %> 
             <%= select_tag "id",  options_from_collection_for_select(Course.all, "id", "name") %>
             <%= hidden_field_tag(:lecturer_id, user.id)  %>
             <%= image_submit_tag("add.png") %></td>

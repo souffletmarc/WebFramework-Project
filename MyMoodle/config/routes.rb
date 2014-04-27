@@ -41,7 +41,7 @@ MyMoodle::Application.routes.draw do
   match 'new_lecturer',  :to => 'users#new_lecturer', :via => [:get]
   match 'new_student',  :to => 'users#new_student', :via => [:get]
 
-  match 'addusertocourse',  :to => 'courses#add_user', :via => [:post]
+  match 'addusertocoursepost',  :to => 'courses#add_user', :via => [:post]
 
 
 

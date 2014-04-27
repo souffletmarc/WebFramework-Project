@@ -25,6 +25,18 @@ module SessionsHelper
     @current_user ||= user_from_remember_token
   end
 
+  def is_student 
+    return false unless current_user.role_id == Role.where(name: 'Student').take.id
+  end
+
+  def is_lecturer 
+    return false unless current_user.role_id == Role.where(name: 'Lecturer').take.id
+  end
+
+  def is_admin
+    return false unless current_user.role_id == Role.where(name: 'Admin').take.id
+  end
+
   private
 
     def user_from_remember_token
