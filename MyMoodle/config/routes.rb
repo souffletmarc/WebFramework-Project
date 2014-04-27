@@ -16,7 +16,7 @@ MyMoodle::Application.routes.draw do
   root :to=>'sessions#new'
   # Example of regular route:
   get '/profil/:id', to: 'users#show', as: 'profil'
-  get '/addcourse/:id', to: 'courses#add_user', as: 'addusertocourse'
+  #get '/addcourse/:id', to: 'courses#add_user', as: 'addusertocourse'
   get '/delcourse/:id', to: 'courses#del_user', as: 'delusertocourse'
 
 
@@ -39,6 +39,8 @@ MyMoodle::Application.routes.draw do
   match 'course_adduser',  :to => 'courses#add_user', :via => [:get]
   match 'new_lecturer',  :to => 'users#new_lecturer', :via => [:get]
   match 'new_student',  :to => 'users#new_student', :via => [:get]
+
+  match 'addusertocourse',  :to => 'courses#add_user', :via => [:post]
 
 
 

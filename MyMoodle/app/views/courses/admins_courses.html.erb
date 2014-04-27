@@ -15,7 +15,11 @@
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.name %></td>
-        <td></td>
+        <% if course.users.where(role_id: Role.where(name: 'Lecturer')).any? %>
+        <td><%= course.users.where(role_id: Role.where(name: 'Lecturer').take.id).take.firstname %> <%= course.users.where(role_id: Role.where(name: 'Lecturer').take.id).take.lastname %></td>
+        <% else %>
+        <td>No lecturer</td>
+        <%end%>
         <td><%= link_to image_tag("details.png"), course %></td>
         <td><%= link_to image_tag("edit.png"), edit_course_path(course) %></td>
         <td><%= link_to image_tag("del.png"), course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -23,7 +27,5 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
 <%= link_to 'New Course', new_course_path %>

@@ -40,7 +40,7 @@
           <% if !(current_user.courses.count == 5) %>
             <td><center>
                 <%= link_to image_tag("add.png"), addusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %>
-            </center</td>
+            </center></td>
           <% end %>
         </tr>
       <% end %>
