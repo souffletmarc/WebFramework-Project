@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
         User.create(:firstname => "Cyntia", :lastname => "Marquis", :email => "cyntia@mymoodle.ie", :password => "cyntia", :role => Role.where(name: 'Student').take)
 
         #Lecturer creation
-        User.create(:firstname => "Barry", :lastname => "Debny", :email => "barry@mymoodle.ie", :password => "barry", :role => Role.where(name: 'Lecturer').take)
+        User.create(:firstname => "Barry", :lastname => "Denby", :email => "barry@mymoodle.ie", :password => "barry", :role => Role.where(name: 'Lecturer').take)
         User.create(:firstname => "Tony", :lastname => "Mullins", :email => "tony@mymoodle.ie", :password => "tony", :role => Role.where(name: 'Lecturer').take)
         User.create(:firstname => "Denis", :lastname => "Lupiana", :email => "denis@mymoodle.ie", :password => "denis", :role => Role.where(name: 'Lecturer').take)
 

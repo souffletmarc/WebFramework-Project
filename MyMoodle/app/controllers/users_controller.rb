@@ -91,6 +91,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def courses_without_lecturer(user_lecturer)
+    @courses = Course.all
+    tab = Array.new
+    @courses.each do |mod|
+      if mod.users.where(role_id: Role.where(name: "Lecturer").take.id).count == 0
+        tab.push mod
+      end
+    end
+    return tab
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
