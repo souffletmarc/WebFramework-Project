@@ -28,6 +28,8 @@ class SessionsController < ApplicationController
         Course.create(:name => "English")
         Course.create(:name => "IT")
         Course.create(:name => "WF")
+
+        Semester.create(:start => Time.now, :end => 6.months.from_now )
       end
     end
   

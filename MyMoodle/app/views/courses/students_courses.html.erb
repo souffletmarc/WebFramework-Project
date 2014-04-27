@@ -1,6 +1,6 @@
 
 <h1>My courses (<%= current_user.courses.size %>/5)</h1>
-
+<h4>Limit unenroll date: <%= Semester.all.first.start + 2.weeks %></h4>
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -21,8 +21,14 @@
         		No grade
         	<% end %>
         </td>
-        <td><center><%= link_to image_tag("del.png"), delusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
-      </center></tr>
+        <% if Time.now < (Semester.all.first.start + 2.weeks) %>
+        <td><center><%= link_to image_tag("del.png"), delusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></center></td>
+        <% else %>
+        <td>
+          <p style="color: red">Deadline reached</p>
+        </td>        
+        <% end %>
+      </tr>
     <% end %>
   </tbody>
 </table>
@@ -59,9 +65,15 @@
         <tr>
           <td><%= course.name %></td>
           <% if !(current_user.courses.count == 5) %>
+           <% if Time.now < (Semester.all.first.start + 2.weeks) %>
             <td><center>
                 <%= link_to image_tag("add.png"), addusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %>
             </center></td>
+            <% else %>
+            <td>
+              <p style="color: red">Deadline reached</p>
+            </td>        
+            <% end %>
           <% end %>
         </tr>
       <% end %>

@@ -3,8 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Date</th>
+      <th>Semester start</th>
+      <th>Semester end</th>
       <th></th>
       <th></th>
       <th></th>
@@ -14,16 +14,13 @@
   <tbody>
     <% @semesters.each do |semester| %>
       <tr>
-        <td><%= semester.date %></td>
-        <td><%= semester.date %></td>
+        <td><%= semester.start %></td>
+        <td><%= semester.end %></td>
         <td><%= link_to 'Show', semester %></td>
         <td><%= link_to 'Edit', edit_semester_path(semester) %></td>
-        <td><%= link_to 'Destroy', semester, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Semester', new_semester_path %>

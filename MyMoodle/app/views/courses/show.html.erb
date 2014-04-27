@@ -7,7 +7,7 @@
 
 <% if current_user.role_id == Role.where(name: 'Lecturer').take.id %>
 	<h3>Students</h3>
-
+<h5>Limit assign/edit grades date: <%= Semester.all.first.end %></h5>
 	<table class="table table-bordered">
 	  <thead>
 	    <tr>
@@ -32,6 +32,7 @@
 	      				<% end %>
 	      			</td>
 	      			<td>
+        			<% if Time.now < (Semester.all.first.end) %>
 	      				<% if !(user.grades.where(course_id: @course.id).any?) %>
 	      					<%= form_tag("/addmarktouser", method: "post") do %>
 	      						<%= hidden_field_tag(:user_id, user.id) %>
@@ -46,7 +47,10 @@
 							  	<%= number_field_tag 'mark', nil, in: 0...101 %>
 							  	<%= image_submit_tag("edit.png") %>
 							<% end %>
-	      				<% end %>	
+	      				<% end %>
+					<% else %>
+			          <p style="color: red">Deadline reached</p>
+					<% end %>
 	      			</td>
 	      		</tr>
 	      <% end %>
