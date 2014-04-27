@@ -16,7 +16,7 @@ MyMoodle::Application.routes.draw do
   root :to=>'sessions#new'
   # Example of regular route:
   get '/profil/:id', to: 'users#show', as: 'profil'
-  #get '/addcourse/:id', to: 'courses#add_user', as: 'addusertocourse'
+  get '/addcourse/:id', to: 'courses#add_user', as: 'addusertocourse'
   get '/delcourse/:id', to: 'courses#del_user', as: 'delusertocourse'
 
 

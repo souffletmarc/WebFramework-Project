@@ -66,9 +66,9 @@ class CoursesController < ApplicationController
   def add_user
    @course = Course.find(params[:id])
 
-   if current_user.role_id = Role.where(name: 'Lecturer').take.id
+   if current_user.role_id == Role.where(name: 'Admin').take.id
       user_lecturer = User.find_by_id(params[:lecturer_id])
-      if !user_lecturer.courses.include?(@course) && user_lecturer.courses.size < 3
+      if user_lecturer != nil && !user_lecturer.courses.include?(@course) && user_lecturer.courses.size < 3
         @course.users << user_lecturer 
       end
       redirect_to admins_modules_path
@@ -77,7 +77,6 @@ class CoursesController < ApplicationController
         @course.users << current_user
       end
       redirect_to students_modules_path
-      head :no_content 
     end
   end
 
