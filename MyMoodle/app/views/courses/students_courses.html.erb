@@ -5,6 +5,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Grade</th>
       <th>Unenroll</th>
     </tr>
   </thead>
@@ -13,11 +14,31 @@
     <% current_user.courses.each do |course| %>
       <tr>
         <td><%= course.name %></td>
+        <td>
+        	<% if current_user.grades.where(course_id: course.id).any? %>
+        		<%= current_user.grades.where(course_id: course.id).take.grade %>
+        	<% else %>
+        		No grade
+        	<% end %>
+        </td>
         <td><center><%= link_to image_tag("del.png"), delusertocourse_path(course.id), data: { confirm: 'Are you sure?' } %></td>
       </center></tr>
     <% end %>
   </tbody>
 </table>
+
+<h1>Results</h1>
+<p>
+	<% if current_user.courses.count >= 3 %>
+		<% if isPassed? %>
+			SUCCESS
+		<% else %>
+			FAIL
+		<% end %>
+	<% else %>
+		N/C
+	<% end %>
+</p>
 
 
 <h1>All courses</h1>
