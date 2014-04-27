@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       render action: 'students_index'
     end
   end
-  
+
   def create
     if params[:role] ==  Role.where(name: 'Student').take.id
       create_student
