@@ -22,6 +22,8 @@ class CoursesController < ApplicationController
 
   # GET /courses/1
   def show
+    @course = Course.find_by_id(params[:id])
+    @users = @course.users
   end
 
   # GET /courses/new
@@ -59,6 +61,19 @@ class CoursesController < ApplicationController
     redirect_to admins_modules_path
   end
 
+  # GET /searchStudent
+  def search
+    @course = Course.find_by_id(params[:course_id])
+    if User.where("role_id = ? AND (id = ? OR lower(firstname) = ? OR lower(lastname) = ?)", Role.where(name: params[:search_who]).take, params[:search_entry].downcase, params[:search_entry].downcase, params[:search_entry].downcase).any?
+      @users = User.where("role_id = ? AND (id = ? OR lower(firstname) = ? OR lower(lastname) = ?)", Role.where(name: params[:search_who]).take, params[:search_entry].downcase, params[:search_entry].downcase, params[:search_entry].downcase)
+    else
+      @users = @course.users.where(role: Role.where(name: params[:search_who]).take)
+    end
+    if params[:search_who] == "Student"
+      render action: 'show', id: params[:course_id]
+    end
+  end
+  
   def add_user
    @course = Course.find(params[:id])
 

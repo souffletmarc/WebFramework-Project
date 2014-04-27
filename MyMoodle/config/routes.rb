@@ -36,6 +36,8 @@ MyMoodle::Application.routes.draw do
   match 'students',  :to => 'users#students_index', :via => [:get]
 
   match 'search',  :to => 'users#search', :via => [:get]
+  match 'searchStudent',  :to => 'courses#search', :via => [:get]
+    
   match 'addmarktouser', :to => 'courses#add_mark', :via => [:post]
   match 'updatemarktouser', :to => 'courses#update_mark', :via => [:post]
 

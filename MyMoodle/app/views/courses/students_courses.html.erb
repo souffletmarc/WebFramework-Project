@@ -35,11 +35,11 @@
 
 <h1>Results</h1>
 <p>
-	<% if current_user.courses.count >= 3 %>
+	<% if (current_user.courses.count >= 3 && current_user.courses.count == current_user.grades.count) %>
 		<% if isPassed? %>
-			SUCCESS
+			<%= getOverallMark %>%: <%= getObservation %>
 		<% else %>
-			FAIL
+			<%= getOverallMark %>%: Fail
 		<% end %>
 	<% else %>
 		N/C

@@ -8,6 +8,15 @@
 <% if current_user.role_id == Role.where(name: 'Lecturer').take.id %>
 	<h3>Students</h3>
 <h5>Limit assign/edit grades date: <%= Semester.all.first.end %></h5>
+<br>
+<%= form_tag("/searchStudent", method: "get") do %>
+	<%= hidden_field_tag(:search_who, "Student") %>
+	<%= hidden_field_tag(:course_id, @course.id) %>
+  	<%= label_tag(:search_entry, "Search a student:") %>
+  	<%= text_field_tag(:search_entry) %>
+  	<%= submit_tag("Search") %>
+<% end %>
+<br>
 	<table class="table table-bordered">
 	  <thead>
 	    <tr>
@@ -19,7 +28,7 @@
 	  </thead>
 	
 	  <tbody>
-	    <% @course.users.each do |user| %>
+	    <% @users.each do |user| %>
 	    	<% if user.role_id == Role.where(name: 'Student').take.id %>
 	      		<tr>
 	        		<td><%= user.id %></td>
