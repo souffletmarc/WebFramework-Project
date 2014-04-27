@@ -26,15 +26,15 @@ module SessionsHelper
   end
 
   def is_student 
-    current_user.role_id == Role.where(name: 'Student').take.id
+    return false unless current_user.role_id == Role.where(name: 'Student').take.id
   end
 
   def is_lecturer 
-    current_user.role_id == Role.where(name: 'Lecturer').take.id
+    return false unless current_user.role_id == Role.where(name: 'Lecturer').take.id
   end
 
   def is_admin
-    current_user.role_id == Role.where(name: 'Admin').take.id
+    return false unless current_user.role_id == Role.where(name: 'Admin').take.id
   end
 
   private
