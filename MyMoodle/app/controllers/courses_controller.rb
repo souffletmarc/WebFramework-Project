@@ -80,6 +80,22 @@ class CoursesController < ApplicationController
     end
   end
 
+  def add_mark
+    user_student = User.find_by_id(params[:user_id])
+    if user_student != nil && !(user_student.grades.where(course_id: params[:course_id]).any?)
+      user_student.grades << Grade.create(grade: params[:mark], user_id: user_student.id, course_id: params[:course_id])
+    end
+
+    redirect_to course_path(params[:course_id])
+  end
+  
+  def update_mark
+    @mark = Grade.where(user_id: params[:user_id], course_id: params[:course_id]).take
+    @mark.grade = params[:mark].to_i
+    @mark.save
+    redirect_to course_path(params[:course_id])
+  end
+  
   def del_user
    @course = Course.find(params[:id])
     if current_user.courses.include?(@course)

@@ -5,5 +5,55 @@
   <%= @course.name %>
 </p>
 
+<% if current_user.role_id == Role.where(name: 'Lecturer').take.id %>
+	<h3>Students</h3>
+
+	<table class="table table-bordered">
+	  <thead>
+	    <tr>
+	      <th>Student number</th>
+	      <th>Name</th>
+	      <th>Mark</th>
+	      <th>Give a mark</th>
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @course.users.each do |user| %>
+	    	<% if user.role_id == Role.where(name: 'Student').take.id %>
+	      		<tr>
+	        		<td><%= user.id %></td>
+	        		<td><%= user.firstname %> <%= user.lastname%></td>
+	      			<td>
+	      				<% if user.grades.where(course_id: @course.id).any? %>
+	      					<%= user.grades.where(course_id: @course.id).take.grade %>
+	      				<% else %>
+	      					No Grade
+	      				<% end %>
+	      			</td>
+	      			<td>
+	      				<% if !(user.grades.where(course_id: @course.id).any?) %>
+	      					<%= form_tag("/addmarktouser", method: "post") do %>
+	      						<%= hidden_field_tag(:user_id, user.id) %>
+	      						<%= hidden_field_tag(:course_id, @course.id) %>
+							  	<%= number_field_tag 'mark', nil, in: 0...101 %>
+							  	<%= image_submit_tag("add.png") %>
+							<% end %>
+						<% else %>
+							<%= form_tag("/updatemarktouser", method: "post") do %>
+	      						<%= hidden_field_tag(:user_id, user.id) %>
+	      						<%= hidden_field_tag(:course_id, @course.id) %>
+							  	<%= number_field_tag 'mark', nil, in: 0...101 %>
+							  	<%= image_submit_tag("edit.png") %>
+							<% end %>
+	      				<% end %>	
+	      			</td>
+	      		</tr>
+	      <% end %>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>
+
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>
