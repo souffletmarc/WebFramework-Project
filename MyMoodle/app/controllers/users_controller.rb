@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_filter :is_student, :only => [:show]
-  before_filter :is_lecturer, :only => [:show, :search]
   def index
   end
   

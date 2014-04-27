@@ -1,7 +1,5 @@
 class GradesController < ApplicationController
   before_action :set_grade, only: [:show, :edit, :update, :destroy]
-  before_filter :is_student, :only => [:show]
-  before_filter :is_admin, :only => []
 
   # GET /grades
   # GET /grades.json

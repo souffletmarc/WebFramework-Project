@@ -1,7 +1,5 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-  before_filter :is_student, :only => [:students_courses, :show, :add_user, :del_user]
-  before_filter :is_lecturer, :only => [:show]
   # GET /courses
   
   def index
