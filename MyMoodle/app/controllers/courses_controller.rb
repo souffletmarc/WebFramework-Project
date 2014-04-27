@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-
+  before_filter :is_student, :only => [:students_courses, :show, :add_user, :del_user]
+  before_filter :is_lecturer, :only => [:show]
   # GET /courses
   
   def index
@@ -48,7 +49,6 @@ class CoursesController < ApplicationController
   def update
       if @course.update(course_params)
         redirect_to @course, notice: 'Course was successfully updated.'
-        head :no_content
       else
         render action: 'edit'
         render json: @course.errors, status: :unprocessable_entity
