@@ -1,5 +1,6 @@
 
 <h1>My courses (<%= current_user.courses.size %>/5)</h1>
+<br>
 <h4>Limit unenroll date: <%= Semester.all.first.start + 2.weeks %></h4>
 <table class="table table-bordered">
   <thead>
@@ -48,7 +49,8 @@
 
 
 <h1>All courses</h1>
-
+<br>
+<h4>Limit enroll date: <%= Semester.all.first.start + 2.weeks %></h4>
 <table class="table table-bordered">
   <thead>
     <tr>
