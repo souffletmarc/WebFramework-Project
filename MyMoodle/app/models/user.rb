@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     belongs_to :role
     has_and_belongs_to_many :courses
-    has_many :grades
+    has_many :grades, :dependent => :destroy
 
     before_save :encrypt_password
     email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
