@@ -1,13 +1,12 @@
-<h1>Listing semesters</h1>
-
-<table>
+<h1>Semester</h1>
+<br>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Semester start</th>
       <th>Semester end</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Show</th>
+      <th>Edit</th>
     </tr>
   </thead>
 
@@ -16,8 +15,8 @@
       <tr>
         <td><%= semester.start %></td>
         <td><%= semester.end %></td>
-        <td><%= link_to 'Show', semester %></td>
-        <td><%= link_to 'Edit', edit_semester_path(semester) %></td>
+        <td><%= link_to image_tag("details.png"), semester %></td>
+        <td><%= link_to image_tag("edit.png"), edit_semester_path(semester) %></td>
       </tr>
     <% end %>
   </tbody>

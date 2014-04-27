@@ -23,6 +23,13 @@
   <strong>Role:</strong>
   <%= Role.find(@user.role_id).name  %>
 </p>
+<% if Role.find(current_user.role_id).name != "Admin" %>
+<% if Role.find(@user.role_id).name == "Student" %>
+<%= link_to image_tag("edit.png"), edit_user_path(@user) %>
+<% else %>
+<%= link_to image_tag("edit.png"), edit_user_path(@user) %>
+<% end %>
+<% else %>
 <% if Role.find(@user.role_id).name == "Student" %>
 <%= link_to image_tag("edit.png"), edit_user_path(@user) %> |
 <%= link_to image_tag("back.png"), students_path %>
@@ -30,3 +37,4 @@
 <%= link_to image_tag("edit.png"), edit_user_path(@user) %> |
 <%= link_to image_tag("back.png"), lecturers_path %>
 <% end %>
+<%end%>

@@ -67,6 +67,9 @@
 	  </tbody>
 	</table>
 <% end %>
+<% if Role.find(current_user.role_id).name == "Admin" %>
+<%= link_to image_tag("edit.png"), edit_course_path(@course) %>
+<%= link_to image_tag("back.png"), admins_modules_path %>
+<%end%>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+
