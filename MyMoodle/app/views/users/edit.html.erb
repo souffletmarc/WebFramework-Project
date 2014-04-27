@@ -4,9 +4,12 @@
 <h1>Editing Lecturer</h1>
 <%end%>
 <%= render 'form' %>
+<br>
 <%= link_to image_tag("details.png"), @user %> 
+<% if Role.find(current_user.role_id).name == "Admin" %>
 <% if Role.find(@user.role_id).name == "Student" %>
 <%= link_to image_tag("back.png"), students_path %>
 <% else %>
 <%= link_to image_tag("back.png"), lecturers_path %>
+<%end%>
 <%end%>

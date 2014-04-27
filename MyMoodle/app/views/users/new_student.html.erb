@@ -27,9 +27,11 @@
     <%= f.label :password %><br>
     <%= f.password_field :password %>
   </div>
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
   <%= f.hidden_field :role_id, :value => Role.where(name: 'Student').take.id %>
   <% end %>
+  <br>
   <%= link_to image_tag("back.png"), students_path %>
