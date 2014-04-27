@@ -78,20 +78,17 @@ class UsersController < ApplicationController
         redirect_to @user, notice: 'User was successfully updated.'
       else
         render action: 'edit'
-        render json: @user.errors, status: :unprocessable_entity
       end
   end
 
   # DELETE /users/1
   def destroy
     @user.destroy
-    if params[:role] ==  Role.where(name: 'Student').take.id
+    if params[:role_id] ==  Role.where(name: 'Student').take.id
     redirect_to students_url
     else
     redirect_to lecturers_url
     end
-    head :no_content
-    
   end
 
   private
