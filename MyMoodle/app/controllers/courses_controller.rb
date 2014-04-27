@@ -37,7 +37,6 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
       if @course.save
         redirect_to @course, notice: 'Course was successfully created.'
-        render action: 'show', status: :created, location: @course
       else
         render action: 'new'
         render json: @course.errors, status: :unprocessable_entity
